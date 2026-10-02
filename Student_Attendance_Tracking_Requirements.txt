@@ -1,0 +1,145 @@
+STUDENT ATTENDANCE TRACKING SYSTEM USING DYNAMIC QR CODES
+
+1. Project Overview
+- Project Name: Student Attendance Tracking System
+- Backend: Python (FastAPI/Flask)
+- Database: PostgreSQL
+- QR Generation: Python qrcode library
+
+2. Problem Statement
+Generate a QR code for each class session and collect attendance from students. Validate attendance against the actual classroom headcount and identify potential attendance fraud.
+
+3. Scenario
+Total Students: 60
+Actual Present Students: 55
+QR Responses Received: 57
+Expected Behavior:
+- Accept only validated attendance records.
+- Flag the additional 2 responses for review.
+- Identify suspicious students through device, session, and validation checks.
+
+4. User Roles
+Admin:
+- Manage students
+- View reports
+- Manage courses
+
+Faculty:
+- Create sessions
+- Enter headcount
+- Generate QR
+- Review attendance
+
+Student:
+- Login
+- Scan QR
+- View attendance history
+
+5. Functional Requirements
+Student Management:
+- Student ID
+- Name
+- Roll Number
+- Email
+- Department
+- Semester
+
+Class Session:
+- Session ID
+- Subject
+- Faculty Name
+- Date
+- Start Time
+- End Time
+
+Headcount Module:
+- Faculty enters actual present count.
+
+QR Generation:
+- Unique session QR
+- 5-minute expiry
+- One-time token
+
+Attendance Capture:
+- Student ID
+- Session ID
+- Timestamp
+- Device ID
+- IP Address
+- Optional GPS Location
+
+6. Attendance Validation
+Case 1:
+Headcount = Responses
+Result: Attendance Approved
+
+Case 2:
+Responses > Headcount
+Result: Fraud Detection Mode
+
+7. Fraud Detection Rules
+- Excess Attendance Detection
+- Duplicate Attendance Detection
+- Multi-device Attendance Detection
+- Expired QR Detection
+- Outside Classroom Detection
+
+Algorithm:
+extra_entries = scanned_count - head_count
+
+Example:
+57 - 55 = 2 suspicious entries
+
+8. Attendance Status
+- PRESENT
+- ABSENT
+- UNDER_REVIEW
+- INVALID_QR
+- DUPLICATE
+- BLOCKED
+
+9. Database Tables
+students
+class_sessions
+attendance
+fraud_logs
+
+10. Dashboard
+Display:
+- Class Strength
+- Head Count
+- Responses Received
+- Valid Attendance
+- Suspicious Attendance
+- Absent Students
+
+11. Reports
+- Daily Attendance Report
+- Monthly Attendance Report
+- Suspicious Activity Report
+
+12. Security
+- JWT Authentication
+- Password Hashing
+- QR Expiry Validation
+- Audit Logs
+
+13. Future Enhancements
+- Face Recognition
+- Geofencing
+- AI Fraud Detection
+
+14. Development Roadmap
+Phase 1: Database Setup
+Phase 2: Student & Faculty Modules
+Phase 3: QR Generation
+Phase 4: Attendance Processing
+Phase 5: Fraud Detection
+Phase 6: Dashboard & Reports
+
+Expected Outcome:
+For Headcount 55 and Responses 57:
+- Mark 55 valid attendances
+- Flag 2 suspicious entries
+- Generate review report
+- Prevent automatic approval of suspicious attendance
