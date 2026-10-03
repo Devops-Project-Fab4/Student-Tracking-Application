@@ -1,0 +1,1 @@
+"""Attendance integration tests."""
